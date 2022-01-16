@@ -15,7 +15,7 @@ def load_box_paths(user_path=None, parser_default='HPC'):
         if 'tmh6260' in user_path : 
             user_path = 'C:/Users/tmh6260'
     home_path = os.path.join(user_path, 'Box', 'NU-malaria-team')
-    data_path = os.path.join(home_path, 'data', 'nxtek')
-    project_path = os.path.join(home_path, 'projects', 'ghana_nxtek')
+    data_path = os.path.join(home_path, 'data', 'burkina_indie1a')
+    project_path = os.path.join(home_path, 'projects', 'burkina_indie1a/indie_grid_model')
 
     return data_path, project_path
