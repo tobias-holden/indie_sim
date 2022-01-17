@@ -1,0 +1,173 @@
+---
+title: "Indie Grid"
+author: "Tobias Holden"
+date: "1/16/2022"
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+usePackage <- function(p) {
+  if (!is.element(p, installed.packages()[,1]))
+    install.packages(p, dep = TRUE)
+  require(p, character.only = TRUE)
+}
+
+listPackages<-c("knitr", "dplyr", "tidyr", "ggplot2", "reshape2", "tcltk", "patchwork")
+
+sapply(listPackages, usePackage)
+
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+```{r}
+spatial_report <- read.csv(tk_choose.files(caption="Select INDIE Spatial Report"))
+head(spatial_report)
+node_info <-  read.csv(tk_choose.files(caption="Select INDIE nodes file"))
+
+spatial_report <- merge(spatial_report,node_info,by.x="node",by.y="nodeid")
+
+bullseye_plot <- ggplot(spatial_report[spatial_report$time==max(spatial_report$time,na.rm=T),], aes(x=x_proj_km, y=y_proj_km, label=node)) +
+  geom_vline(xintercept = seq(651,672,1), size=0.2, color="black") +
+  geom_hline(yintercept = seq(1329,1344,1), size=0.2, color="black") +
+  geom_point(aes(size=population, fill="Total Pop."), pch=21) +
+  geom_point(data=spatial_report[spatial_report$study_population>0,],aes(size=study_population, fill="Study Pop."), pch=21) +
+  scale_fill_manual(values=c("red","white")) +
+  #geom_text(color="black", position = ) +
+  theme_void() +
+  theme(panel.background = element_rect(fill="lightgray")) +
+  labs(fill="", size="") +
+  theme(legend.position=c(0.25,0.2), legend.direction = "horizontal", legend.background = element_rect(fill="white")) +
+  guides(fill = guide_legend(override.aes = list(size = 3)))
+  
+bullseye_plot
+
+
+spatial_report$new_node_id <- 1 + spatial_report$y_proj_km - min(spatial_report$y_proj_km) + 15*(spatial_report$x_proj_km-min(spatial_report$x_proj_km)) 
+
+enumerated_map <- ggplot(spatial_report[spatial_report$time==1,], aes(x=x_proj_km, y=y_proj_km, fill=population)) +
+  geom_vline(xintercept = seq(651,672,1), size=0.2, color="black") +
+  geom_hline(yintercept = seq(1329,1344,1), size=0.2, color="black") +
+  geom_tile(color="black") + 
+  geom_text(aes(label=new_node_id),color="black", size=2.5) +
+  theme_void() + 
+  coord_cartesian(xlim=c(651,672), ylim = c(1329,1344), expand=F) +
+  scale_fill_fermenter(palette = "RdYlGn", breaks = c(1,10,50,100,150,200,250,300,Inf), direction = 1)
+
+
+
+enumerated_map
+
+
+
+```
+
+```{r}
+fb_pop <- read.csv(tk_choose.files(caption="Select Clipped FB Raster CSV"))
+
+fine_fb_map <- ggplot(fb_pop, aes(x=longitude, y=latitude, fill=pop)) + 
+  geom_tile()
+
+fine_fb_map <- fine_fb_map + theme_void() + scale_fill_distiller(palette = "Spectral")
+
+# Aggregate population counts in 1x1km cells, like in the model
+
+x_bins <- seq(min(fb_pop$longitude),max(fb_pop$longitude),(max(fb_pop$longitude)-min(fb_pop$longitude))/21)
+y_bins <- seq(min(fb_pop$latitude),max(fb_pop$latitude),(max(fb_pop$latitude)-min(fb_pop$latitude))/15)
+
+fb_pop$grid_x <- cut(fb_pop$longitude,breaks = x_bins, include.lowest = T)
+fb_pop$grid_y <- cut(fb_pop$latitude,breaks = y_bins ,include.lowest = T)
+
+fb_cells <- fb_pop %>% group_by(grid_x,grid_y) %>% summarise(cell_pop = sum(pop))
+
+fb_cells$id <- rownames(fb_cells)
+
+coarse_fb_map <- ggplot(fb_cells, aes(x=grid_x,y=grid_y, fill=cell_pop)) + 
+  geom_tile(color="black") + 
+  geom_text(aes(label=id),color="black", size=2.5) +
+  scale_fill_fermenter(palette = "RdYlGn", breaks = c(1,10,50,100,150,200,250,300,Inf), direction=1) +
+  theme(axis.text.x=element_text(angle=90)) +
+  theme_void()
+
+fine_fb_map <- fine_fb_map + geom_hline(yintercept = y_bins) + geom_vline(xintercept = x_bins)
+```
+
+
+```{r}
+coarse_fb_map + enumerated_map
+
+missing_nodes <- subset(fb_cells, !id%in%spatial_report$new_node_id)
+
+comparable_nodes <- merge(fb_cells,spatial_report[spatial_report$time==1,c("node","new_node_id","Population","study_population")], by.x="id", by.y="new_node_id")
+
+all_nodes <- merge(fb_cells,spatial_report[spatial_report$time==1,c("node","new_node_id","Population","study_population", "lat", "lon")], by.x="id", by.y="new_node_id", all=T)
+
+ggplot(all_nodes, aes(x=grid_x,y=grid_y,fill=Population-cell_pop)) + 
+  geom_tile(color="black") +
+  geom_text(aes(label=round(Population)),color="black", size=3, nudge_y = 0.3) +
+  geom_text(aes(label=round(cell_pop)),color="white", size=3, nudge_y = -0.3) +
+  scale_fill_fermenter(palette="RdYlGn", direction=1, breaks=c(-Inf,-200,-100,-50,-10,0,10,50,100,200, Inf)) +
+  theme_void() +
+  labs(fill="Population Count\n(INDIE - Facebook)") +
+  theme(legend.direction = "horizontal", legend.key.width = unit(1.5,"cm"), legend.position = "bottom")
+
+pop_pal <- RColorBrewer::brewer.pal(9,"Blues")[2:9]
+pop_pal <- c("#bfbfbf",pop_pal)
+
+pop_grid <- ggplot(all_nodes, aes(x=grid_x,y=grid_y)) + 
+  geom_tile(aes(fill=Population),color="black", alpha=1) +
+  geom_tile(data=all_nodes[is.na(all_nodes$Population),],aes(fill=cell_pop), color="black", alpha=1)+
+  #scale_fill_fermenter(palette="Blues", breaks = c(0,1, 10, 20, 50, 75, 100, 150, 200, Inf)) +
+  theme_void() +
+  geom_text(aes(label=round(cell_pop)), nudge_y = -0.3,size=3,color="orange") +
+  geom_text(aes(label=round(Population)), nudge_y = 0.3,size=3,color="green") +
+  theme(legend.direction = "horizontal", legend.key.width = unit(1.5,"cm"), legend.position = "bottom")
+
+
+scale_fill_fermenter_custom <- function(pal, na.value = "grey50", guide = "coloursteps", aesthetics = "fill", ...) {
+  binned_scale("fill", "fermenter", ggplot2:::binned_pal(scales::manual_pal(unname(pal))), na.value = na.value, guide = guide, breaks=breaks...)  
+}
+
+pop_grid + scale_fill_fermenter_custom(pal=pop_pal, breaks=c(0,1, 10, 20, 50, 75, 100, 150, 200, Inf))
+
+
+# Average Map between Indie and FB
+
+all_nodes$avg_pop <- rowMeans(all_nodes[,c("cell_pop","Population")], na.rm=TRUE)
+
+avg_pop_grid <- ggplot(all_nodes, aes(x=grid_x,y=grid_y)) + 
+  geom_tile(aes(fill=avg_pop),color="black", alpha=1) +
+  #scale_fill_fermenter(palette="Blues", breaks = c(0,1, 10, 20, 50, 75, 100, 150, 200, Inf)) +
+  theme_void() +
+  geom_text(aes(label=round(cell_pop)), nudge_y = -0.3,size=3,color="orange") +
+  geom_text(aes(label=round(Population)), nudge_y = 0.3,size=3,color="green") +
+  geom_text(aes(label=round(avg_pop)), size=3, color="pink") +
+  theme(legend.direction = "horizontal", legend.key.width = unit(1.5,"cm"), legend.position = "bottom")
+
+avg_pop_grid + scale_fill_fermenter_custom(pal=pop_pal, breaks=c(0,1, 10, 20, 50, 75, 100, 150, 200, Inf))
+
+
+```
+
+
+Try mapping onto existing shapefiles
+
+```{r}
+library(sf)
+library(tmap)
+
+bf_shps <- tk_choose.dir(caption="Navigate to Burkina Shapefiles Folder")
+map.bf.natural <- st_read(paste(bf_shps,"burkina_faso_natural/burkina_faso_natural.shp",sep="/"))
+map.bf.water <- st_read(paste(bf_shps,"BFA_wat/BFA_water_areas_dcw.shp",sep="/"))
+map.bf.lakes <- st_read(paste(bf_shps,"BFA_lakes/bfa_lakes.shp",sep="/"))
+map.bf.rivers <- st_read(paste(bf_shps,"BFA_rivers/BFA_rvrs_lines_1m_dcw.shp",sep="/"))
+plot(map.bf.health[map.bf.health$is.sapone,1])
+map.bf.roads <- st_read(paste(bf_shps,"BFA_rds/BFA_roads.shp",sep="/"))
+map.bf.health <- st_read(paste(bf_shps,"Health Districts Burkina/70ds_.shp",sep="/"))
+map.bf.health$is.sapone <- map.bf.health$NOMDEP == "SAPONE" 
+
+tm_shape(map.bf.health[map.bf.health$is.sapone,]) + tm_polygons() +
+  tm_
+```
+
