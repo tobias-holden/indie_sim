@@ -118,7 +118,7 @@ def setup_simulation(cb, years, input_file_name='bf_indie_grid', outbreak=True):
     set_up_input_files(cb, input_file_name=input_file_name)
     set_up_larval_habitat(cb)
     set_up_biting_risk(cb)
-    set_up_human_migration(cb, input_file_name=input_file_name)
-    set_up_vector_migration(cb, input_file_name=input_file_name)
+    #set_up_human_migration(cb, input_file_name=input_file_name)
+    #set_up_vector_migration(cb, input_file_name=input_file_name)
     if outbreak :
         recurring_outbreak(cb, start_day=180, repetitions=years, tsteps_btwn=365, outbreak_fraction=0.01)

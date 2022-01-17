@@ -49,9 +49,11 @@ class SpatialAnalyzer(BaseAnalyzer):
         df.to_csv(os.path.join(self.wdir, '%s.csv' % self.expt_name), index=False)
 
 
-def analyze_by_expt_id(expt_name, expt_id, channels=['Population', 'PCR_Parasite_Prevalence'],
+def analyze_by_expt_id(expt_name, expt_id, channels=None,
                        sweep_variables=None) :
 
+    if channels is None:
+        channels = ['Population', 'PCR_Parasite_Prevalence', 'New_Infections', "New_Clinical_Cases"]
     from simtools.Analysis.AnalyzeManager import AnalyzeManager
     from simtools.SetupParser import SetupParser
 
@@ -71,7 +73,7 @@ def analyze_by_expt_id(expt_name, expt_id, channels=['Population', 'PCR_Parasite
 if __name__ == "__main__":
 
     expt_name = 'bf_indie_test'
-    expt_id = ''
+    expt_id = 'b22a3ebc-3677-ec11-a9f2-9440c9be2c51'
 
-    channels = ['Population', 'PCR_Parasite_Prevalence']
+    channels = ['Population', 'PCR_Parasite_Prevalence', 'New_Infections', "New_Clinical_Cases"]
     analyze_by_expt_id(expt_name, expt_id, channels=channels)
