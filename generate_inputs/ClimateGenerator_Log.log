@@ -1,0 +1,84 @@
+2022-01-16 18:01:43,543: INFO: Created request for climate files generation.
+2022-01-16 18:01:43,543: INFO: Commissioning...
+2022-01-16 18:01:43,856: INFO: CommissionRequested.
+2022-01-16 18:01:43,857: INFO: Work item id is: f90f8988-2877-ec11-a9f2-9440c9be2c51.
+2022-01-16 18:03:29,531: INFO: Work item state is: WorkItemState.Succeeded
+2022-01-16 18:03:29,531: INFO: Climate files SUCCESSFULLY generated
+2022-01-16 18:03:30,347: INFO: Found output files:
+2022-01-16 18:03:30,348: INFO: - Burkina Faso_30arcsec_relative_humidity_daily.bin.json (2 KB)
+2022-01-16 18:03:30,348: INFO: - Burkina Faso_30arcsec_air_temperature_daily.bin.json (2 KB)
+2022-01-16 18:03:30,349: INFO: - Burkina Faso_30arcsec_rainfall_daily.bin (111 KB)
+2022-01-16 18:03:30,349: INFO: - Burkina Faso_30arcsec_air_temperature_daily.bin (111 KB)
+2022-01-16 18:03:30,350: INFO: - Burkina Faso_30arcsec_relative_humidity_daily.bin (111 KB)
+2022-01-16 18:03:30,350: INFO: - Burkina_Faso_2.5arcmin_demographics.json (324 KB)
+2022-01-16 18:03:30,350: INFO: - Burkina Faso_30arcsec_rainfall_daily.bin.json (2 KB)
+2022-01-16 18:03:30,351: INFO: Downloading to C:/Users/tmh6260\Box\NU-malaria-team\projects\burkina_indie1a/indie_grid_model\simulation_inputs\bf_indie_grid...
+2022-01-16 18:03:31,455: INFO: Climate files SUCCESSFULLY stored.
+2022-01-16 18:13:59,955: INFO: Created request for climate files generation.
+2022-01-16 18:13:59,955: INFO: Commissioning...
+2022-01-16 18:14:00,203: INFO: CommissionRequested.
+2022-01-16 18:14:00,203: INFO: Work item id is: 2c5bff3b-2a77-ec11-a9f2-9440c9be2c51.
+2022-01-16 18:15:24,633: INFO: Work item state is: WorkItemState.Succeeded
+2022-01-16 18:15:24,633: INFO: Climate files SUCCESSFULLY generated
+2022-01-16 18:15:25,947: INFO: Found output files:
+2022-01-16 18:15:25,947: INFO: - Burkina Faso_30arcsec_relative_humidity_daily.bin.json (2 KB)
+2022-01-16 18:15:25,947: INFO: - Burkina Faso_30arcsec_air_temperature_daily.bin.json (2 KB)
+2022-01-16 18:15:25,947: INFO: - Burkina Faso_30arcsec_rainfall_daily.bin (111 KB)
+2022-01-16 18:15:25,947: INFO: - Burkina Faso_30arcsec_air_temperature_daily.bin (111 KB)
+2022-01-16 18:15:25,947: INFO: - Burkina Faso_30arcsec_relative_humidity_daily.bin (111 KB)
+2022-01-16 18:15:25,947: INFO: - Burkina Faso_30arcsec_rainfall_daily.bin.json (2 KB)
+2022-01-16 18:15:25,947: INFO: - Burkina_Faso_2.5arcmin_demographics.json (324 KB)
+2022-01-16 18:15:25,947: INFO: Downloading to C:\Users\tmh6260\Box\NU-malaria-team\projects\burkina_indie1a\indie_grid_model\simulation_inputs\bf_indie_grid...
+2022-01-16 18:15:27,187: INFO: Climate files SUCCESSFULLY stored.
+2022-01-16 18:15:46,917: INFO: Created request for climate files generation.
+2022-01-16 18:15:46,917: INFO: Commissioning...
+2022-01-16 18:15:47,192: INFO: CommissionRequested.
+2022-01-16 18:15:47,193: INFO: Work item id is: e515477f-2a77-ec11-a9f2-9440c9be2c51.
+2022-01-16 18:17:16,995: INFO: Work item state is: WorkItemState.Succeeded
+2022-01-16 18:17:16,995: INFO: Climate files SUCCESSFULLY generated
+2022-01-16 18:17:17,887: INFO: Found output files:
+2022-01-16 18:17:17,887: INFO: - Burkina Faso_30arcsec_relative_humidity_daily.bin.json (2 KB)
+2022-01-16 18:17:17,888: INFO: - Burkina Faso_30arcsec_air_temperature_daily.bin.json (2 KB)
+2022-01-16 18:17:17,888: INFO: - Burkina Faso_30arcsec_rainfall_daily.bin (111 KB)
+2022-01-16 18:17:17,888: INFO: - Burkina Faso_30arcsec_air_temperature_daily.bin (111 KB)
+2022-01-16 18:17:17,889: INFO: - Burkina Faso_30arcsec_relative_humidity_daily.bin (111 KB)
+2022-01-16 18:17:17,889: INFO: - Burkina Faso_30arcsec_rainfall_daily.bin.json (2 KB)
+2022-01-16 18:17:17,889: INFO: - Burkina_Faso_2.5arcmin_demographics.json (324 KB)
+2022-01-16 18:17:17,889: INFO: Downloading to C:\Users\tmh6260\Box\NU-malaria-team\projects\burkina_indie1a\indie_grid_model\simulation_inputs\bf_indie_grid...
+2022-01-16 18:17:18,951: INFO: Climate files SUCCESSFULLY stored.
+2022-01-16 18:48:09,301: INFO: Created request for climate files generation.
+2022-01-16 18:48:09,301: INFO: Commissioning...
+2022-01-16 18:48:09,559: INFO: CommissionRequested.
+2022-01-16 18:48:09,559: INFO: Work item id is: d4fe0705-2f77-ec11-a9f2-9440c9be2c51.
+2022-01-16 18:49:28,848: INFO: Work item state is: WorkItemState.Succeeded
+2022-01-16 18:49:28,849: INFO: Climate files SUCCESSFULLY generated
+2022-01-16 18:49:29,702: INFO: Found output files:
+2022-01-16 18:49:29,702: INFO: - Burkina Faso_30arcsec_relative_humidity_daily.bin.json (2 KB)
+2022-01-16 18:49:29,702: INFO: - Burkina Faso_30arcsec_air_temperature_daily.bin.json (2 KB)
+2022-01-16 18:49:29,702: INFO: - Burkina Faso_30arcsec_rainfall_daily.bin (111 KB)
+2022-01-16 18:49:29,702: INFO: - Burkina Faso_30arcsec_air_temperature_daily.bin (111 KB)
+2022-01-16 18:49:29,702: INFO: - Burkina Faso_30arcsec_relative_humidity_daily.bin (111 KB)
+2022-01-16 18:49:29,703: INFO: - Burkina Faso_30arcsec_rainfall_daily.bin.json (2 KB)
+2022-01-16 18:49:29,703: INFO: - Burkina_Faso_2.5arcmin_demographics.json (324 KB)
+2022-01-16 18:49:29,703: INFO: Downloading to C:\Users\tmh6260\Box\NU-malaria-team\projects\burkina_indie1a\indie_grid_model\simulation_inputs\bf_indie_grid...
+2022-01-16 18:49:30,896: INFO: Climate files SUCCESSFULLY stored.
+2022-01-16 18:53:03,040: INFO: Created request for climate files generation.
+2022-01-16 18:53:03,041: INFO: Commissioning...
+2022-01-16 18:53:03,298: INFO: CommissionRequested.
+2022-01-16 18:53:03,299: INFO: Work item id is: 00821bb4-2f77-ec11-a9f2-9440c9be2c51.
+2022-01-16 18:54:33,077: INFO: Work item state is: WorkItemState.Succeeded
+2022-01-16 18:54:33,077: INFO: Climate files SUCCESSFULLY generated
+2022-01-16 18:54:33,886: INFO: Found output files:
+2022-01-16 18:54:33,887: INFO: - Burkina Faso_30arcsec_relative_humidity_daily.bin.json (2 KB)
+2022-01-16 18:54:33,887: INFO: - Burkina Faso_30arcsec_air_temperature_daily.bin.json (2 KB)
+2022-01-16 18:54:33,887: INFO: - Burkina Faso_30arcsec_rainfall_daily.bin (111 KB)
+2022-01-16 18:54:33,887: INFO: - Burkina Faso_30arcsec_air_temperature_daily.bin (111 KB)
+2022-01-16 18:54:33,887: INFO: - Burkina Faso_30arcsec_relative_humidity_daily.bin (111 KB)
+2022-01-16 18:54:33,887: INFO: - Burkina Faso_30arcsec_rainfall_daily.bin.json (2 KB)
+2022-01-16 18:54:33,887: INFO: - Burkina_Faso_2.5arcmin_demographics.json (324 KB)
+2022-01-16 18:54:33,888: INFO: Downloading to C:\Users\tmh6260\Box\NU-malaria-team\projects\burkina_indie1a\indie_grid_model\simulation_inputs\bf_indie_grid...
+2022-01-16 18:54:35,056: INFO: Climate files SUCCESSFULLY stored.
+2022-01-16 18:57:00,898: INFO: Created request for climate files generation.
+2022-01-16 18:57:00,899: INFO: Commissioning...
+2022-01-16 18:57:01,254: INFO: CommissionRequested.
+2022-01-16 18:57:01,254: INFO: Work item id is: 239ede41-3077-ec11-a9f2-9440c9be2c51.

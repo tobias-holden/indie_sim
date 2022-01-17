@@ -74,6 +74,6 @@ if __name__ == "__main__":
 
     expt_name = 'bf_indie_test'
     expt_id = 'b22a3ebc-3677-ec11-a9f2-9440c9be2c51'
-
     channels = ['Population', 'PCR_Parasite_Prevalence', 'New_Infections', "New_Clinical_Cases"]
+    sweep_variables = ['CM_Coverage']
     analyze_by_expt_id(expt_name, expt_id, channels=channels)

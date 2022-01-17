@@ -42,7 +42,7 @@ add_filtered_spatial_report(cb, start=reporting_start_day, channels=["Population
 builder = ModBuilder.from_list([[ModFn(DTKConfigBuilder.set_param, 'Run_Number', x),
                                  ModFn(add_case_management, coverage=cov)]
                                 for x in range(numseeds)
-                                for cov in [0.8]
+                                for cov in [0.5, 0.75]
                                 ])
 
 # run_sim_args is what the `dtk run` command will look for
