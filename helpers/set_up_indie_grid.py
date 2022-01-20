@@ -112,7 +112,7 @@ def set_up_biting_risk(cb):
     })
     
 
-def setup_simulation(cb, years, input_file_name='bf_indie_grid', outbreak=True):
+def setup_simulation(cb, years, input_file_name='bf_indie_full_grid', outbreak=True):
 
     set_up_basic_params(cb, years)
     set_up_input_files(cb, input_file_name=input_file_name)

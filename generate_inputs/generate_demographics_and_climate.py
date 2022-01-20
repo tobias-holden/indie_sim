@@ -52,17 +52,20 @@ if __name__ == '__main__' :
     inputs_path = os.path.join(projectpath, 'simulation_inputs')
     master_csv = os.path.join(inputs_path, 'demographics', 'nodes.csv')
     df = pd.read_csv(master_csv, encoding='latin')
+    # Force nodeid column to integer?
+    convert_dict = {'nodeid':int}
+    df = df.astype(convert_dict)
 
-    input_file_name = 'bf_indie_grid'
+    input_file_name = 'bf_indie_full_grid'
 
     demo_fname = os.path.join(inputs_path, 'demographics', '%s_demographics.json' % input_file_name)
-
+    #print(df.nodeid.to_string(index=False))
     generate_demographics(df, demo_fname)
 
-    generate_climate(demo_fname, input_file_name)
+    #generate_climate(demo_fname, input_file_name)
     # for tag in ['air_temperature', 'rainfall', 'relative_humidity'] :
-    #     os.replace(os.path.join(inputs_path, 'Burkina Faso_30arcsec_%s_daily.bin' % tag),
-    #                os.path.join(inputs_path, 'climate', '%s_%s_daily.bin' % (input_file_name, tag)))
-    #     os.replace(os.path.join(inputs_path, 'climate', 'Burkina Faso_30arcsec_%s_daily.bin.json' % tag),
-    #                os.path.join(inputs_path, 'climate', '%s_%s_daily.bin.json' % (input_file_name, tag)))
-    # os.remove(os.path.join(inputs_path, 'climate', 'Burkina Faso_2.5arcmin_demographics.json'))
+    #       os.replace(os.path.join(inputs_path, 'Burkina Faso_30arcsec_%s_daily.bin' % tag),
+    #                  os.path.join(inputs_path, 'climate', '%s_%s_daily.bin' % (input_file_name, tag)))
+    #       os.replace(os.path.join(inputs_path, 'climate', 'Burkina Faso_30arcsec_%s_daily.bin.json' % tag),
+    #                  os.path.join(inputs_path, 'climate', '%s_%s_daily.bin.json' % (input_file_name, tag)))
+    #       os.remove(os.path.join(inputs_path, 'climate', 'Burkina Faso_2.5arcmin_demographics.json'))
